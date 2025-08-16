@@ -1,0 +1,14 @@
+# Byte-compiled / cache
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+
+# Uploads and generated files
+static/uploads/
+output*.mp4
+
+# OS / editor files
+.DS_Store
+.vscode/

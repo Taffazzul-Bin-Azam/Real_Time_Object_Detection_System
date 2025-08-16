@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Login - Object Detection System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #214e63;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+    }
+    .login-container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      width: 100%;
+      max-width: 400px;
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+    .login-container h2 {
+      margin-bottom: 25px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+    }
+    .form-control {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 10px;
+      color: #b16262;
+      padding: 12px 15px;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+    .form-control:focus {
+      background: rgba(255, 255, 255, 0.4);
+      color: #000;
+      outline: none;
+      box-shadow: none;
+    }
+    .btn-login {
+      background-color: #81aebb;
+      background-image: linear-gradient(315deg, #81cfce 0%, #a9c6e9 74%);
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: background 0.3s ease;
+      width: 100%;
+      margin-top: 15px;
+      color: white;
+      cursor: pointer;
+    }
+    .btn-login:hover {
+      background-image: linear-gradient(315deg, #0072ff 0%, #00c6ff 74%);
+    }
+    .error-message {
+      margin-top: 15px;
+      color: #ff6b6b;
+      font-weight: 600;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container shadow-lg">
+    <h2>Admin Login</h2>
+    <form id="loginForm">
+      <input
+        type="text"
+        id="username"
+        class="form-control mb-3"
+        placeholder="Username"
+        required
+        autocomplete="off"
+      />
+      <input
+        type="password"
+        id="password"
+        class="form-control mb-3"
+        placeholder="Password"
+        required
+        autocomplete="off"
+      />
+      <button type="submit" class="btn-login">Log In</button>
+      <div class="error-message" id="errorMessage">Invalid credentials, please try again.</div>
+    </form>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const errorMessage = document.getElementById('errorMessage');
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      // Simple frontend validation example (replace with your own auth API)
+      if (username === 'sheeku' && password === 'sheeku@123') {
+        // Redirect to admin panel after successful login
+        window.location.href = '/admin'; // Adjust to your admin panel URL
+      } else {
+        // Show error message
+        errorMessage.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

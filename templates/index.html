@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Object Detection System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Object Detection System</h1>
+        <p> For detecting Real-Time Objects around us</p>
+    </header>
+
+    <main>
+        <!-- Real-Time Video Feed -->
+        <div class="video-container">
+            <img id="videoFeed" src="" alt="Video Feed" />
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="controls">
+            <button id="cameraToggleBtn" onclick="toggleCamera()">🎥 Start Camera for Detection</button>
+            <button onclick="toggleNightMode()">🌙 Toggle Night Mode</button>
+            <button onclick="takeScreenshot()">📸 Take Screenshot</button>
+            <button onclick="downloadLog()">📄 Download Detection History Log</button>
+        </div>
+
+        <!-- Detection Info -->
+        <!-- <section>
+            <h2>📋 Detected Objects Log</h2>
+            <ul id="objectLogList"></ul>
+        </section> -->
+
+        <hr />
+
+        <!-- Image Upload Detection -->
+        <section>
+            <h2>📷 Detect from Image</h2>
+            <form id="imageForm" action="/upload_image" method="POST" enctype="multipart/form-data">
+                <input type="file" name="image" accept="image/*" required />
+                <button type="submit">Upload & Detect</button>
+            </form>
+            <div id="imageDownloadLink"></div>
+        </section>
+
+        <!-- Video Upload Detection -->
+        <section>
+            <h2>🎞️ Detect from Video</h2>
+            <form id="videoForm" action="/upload_video" method="POST" enctype="multipart/form-data">
+                <input type="file" name="video" accept="video/*" required />
+                <button type="submit">Upload & Detect</button>
+            </form>
+            <div id="videoDownloadLink"></div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 Taffazzul Bin Azam. All rights reserved.
+    </footer>
+
+    <!-- JavaScript Section -->
+    <script>
+        let cameraOn = false;
+
+        function toggleCamera() {
+            const videoFeed = document.getElementById("videoFeed");
+            const btn = document.getElementById("cameraToggleBtn");
+
+            if (!cameraOn) {
+                videoFeed.src = "{{ url_for('video_feed') }}";
+                videoFeed.style.display = "block";
+                btn.textContent = "🛑 Stop Camera";
+                startLogUpdates();
+            } else {
+                videoFeed.src = "";
+                videoFeed.style.display = "none";
+                btn.textContent = "🎥 Start Camera for Detection";
+                stopLogUpdates();
+            }
+
+            cameraOn = !cameraOn;
+        }
+
+        function toggleNightMode() {
+            document.body.classList.toggle("night-mode");
+        }
+
+        function takeScreenshot() {
+            const video = document.getElementById("videoFeed");
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
+
+            canvas.width = video.naturalWidth;
+            canvas.height = video.naturalHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            const link = document.createElement("a");
+            link.download = "screenshot.png";
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        }
+
+    function downloadLog() {
+    alert("Only ADMIN can access this feature.");
+    setTimeout(() => {
+        window.location.href = "/login";  // Redirects to Flask route
+    }, 10);
+}
+
+       function fetchLog() {
+            fetch("/get_log")
+                .then((response) => response.json())
+                .then((data) => {
+                    const logList = document.getElementById("objectLogList");
+                    logList.innerHTML = "";
+                    data.forEach((entry) => {
+                        const li = document.createElement("li");
+                        li.textContent = `${entry.timestamp} - ${entry.label} (${entry.confidence}%) at ${entry.distance}`;
+                        logList.appendChild(li);
+                    });
+                });
+        }
+
+        let logInterval;
+
+        function startLogUpdates() {
+            fetchLog();
+            logInterval = setInterval(fetchLog, 5000);
+        }
+
+        function stopLogUpdates() {
+            clearInterval(logInterval);
+        }
+
+        // Handle image form submission
+        document.getElementById("imageForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            fetch("/upload_image", {
+                method: "POST",
+                body: formData,
+            })
+                .then((response) => response.blob())
+                .then((blob) => {
+                    const link = document.createElement("a");
+                    link.href = URL.createObjectURL(blob);
+                    link.download = "detected_image.jpg";
+                    link.textContent = "Download Detected Image";
+                    document.getElementById("imageDownloadLink").innerHTML = "";
+                    document.getElementById("imageDownloadLink").appendChild(link);
+                });
+        });
+
+        // Handle video form submission
+        document.getElementById("videoForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            fetch("/upload_video", {
+                method: "POST",
+                body: formData,
+            })
+                .then((response) => response.blob())
+                .then((blob) => {
+                    const link = document.createElement("a");
+                    link.href = URL.createObjectURL(blob);
+                    link.download = "detected_video.mp4";
+                    link.textContent = "Download Detected Video";
+                    document.getElementById("videoDownloadLink").innerHTML = "";
+                    document.getElementById("videoDownloadLink").appendChild(link);
+                });
+        });
+    </script>
+</body>
+</html>
