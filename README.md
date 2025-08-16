@@ -84,4 +84,7 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 [![Screenshot (14)](https://github.com/Taffazzul-Bin-Azam/Real_Time_Object_Detection_System/blob/main/static/Screenshot%20(499).png)
 [![Screenshot (14)](https://github.com/Taffazzul-Bin-Azam/Real_Time_Object_Detection_System/blob/main/static/Screenshot%20(501).png)
 [![Screenshot (14)](https://github.com/Taffazzul-Bin-Azam/Real_Time_Object_Detection_System/blob/main/static/Screenshot%20(506).png)
+[![Screenshot (49)](https://github.com/Taffazzul-Bin-Azam/Real_Time_Object_Detection_System/blob/main/static/Screenshot%20(506).png)
+[![Screenshot (50)](https://github.com/Taffazzul-Bin-Azam/Real_Time_Object_Detection_System/blob/main/static/Screenshot%20(506).png)
+
 
