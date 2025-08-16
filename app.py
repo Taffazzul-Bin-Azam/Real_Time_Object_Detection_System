@@ -14,7 +14,8 @@ PERSON_REAL_WIDTH = 30  # cm
 FONTS = cv2.FONT_HERSHEY_SIMPLEX
 
 # === Load YOLOv5 Model ===
-model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
+model = torch.hub.load('ultralytics/yolov5', 'custom', path='yolov5s.pt')
+
 
 # === Haar Cascade ===
 face_detector = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
