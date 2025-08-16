@@ -78,7 +78,9 @@ Objectify-YOLOv5/
 Contributions are welcome! Please open an issue or submit a pull request for any changes or improvements.
 
 
-## DEMP APPLICATION
+## DEM0 OF MY APPLICATION
 ----
 
 [![Screenshot (14)](https://github.com/Taffazzul-Bin-Azam/Real_Time_Object_Detection_System/blob/main/static/Screenshot%20(499).png)
+[![Screenshot (14)](https://github.com/Taffazzul-Bin-Azam/Real_Time_Object_Detection_System/blob/main/static/Screenshot%20(499).png)
+
