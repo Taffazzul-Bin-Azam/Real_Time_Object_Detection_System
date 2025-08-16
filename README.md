@@ -82,4 +82,4 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 ----
 
 [![Screenshot (14)](https://github.com/user-attachments/assets/cf39523f-4e55-4c19-ad66-d1fcce93251c)
-](https://github.com/Taffazzul-Bin-Azam/Real_Time_Object_Detection_System/blob/main/static/Screenshot%20(499).png)
+[![Screenshot (14)](https://github.com/Taffazzul-Bin-Azam/Real_Time_Object_Detection_System/blob/main/static/Screenshot%20(499).png)
